@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .profile-container {
+            width: 90%;
+            margin: auto;
+        }
+        .section-box {
+            background: #fff;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #dddddd;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <h2>User Profile: {{ username }}</h2>
+
+    <!-- Stress Trend -->
+    <div class="section-box">
+        <h3>Stress Level Trend</h3>
+        <canvas id="stressTrend"></canvas>
+
+        <table>
+            <tr>
+                <th>Stress Level</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for item in stress_history %}
+            <tr>
+                <td>{{ item.stress_level }}</td>
+                <td>{{ item.message }}</td>
+                <td>{{ item.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- PHQ-9 History -->
+    <div class="section-box">
+        <h3>PHQ-9 History</h3>
+        <canvas id="phqTrend"></canvas>
+
+        <table>
+            <tr>
+                <th>Score</th>
+                <th>Severity</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for item in phq9_history %}
+            <tr>
+                <td>{{ item.score }}</td>
+                <td>{{ item.severity }}</td>
+                <td>{{ item.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- Chat Sentiment -->
+    <div class="section-box">
+        <h3>Chat Sentiment Summary</h3>
+        <canvas id="sentimentChart"></canvas>
+
+        <table>
+            <tr>
+                <th>Message</th>
+                <th>Sentiment</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for item in chat_summary %}
+            <tr>
+                <td>{{ item.user_message }}</td>
+                <td>{{ item.sentiment }}</td>
+                <td>{{ item.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+<script>
+// Stress trend chart
+new Chart(document.getElementById('stressTrend'), {
+    type: 'line',
+    data: {
+        labels: {{ stress_history | map(attribute='timestamp') | list | tojson }},
+        datasets: [{
+            label: 'Stress Level',
+            data: {{ stress_history | map(attribute='stress_level') | list | tojson }},
+            borderColor: '#F44336',
+            fill: false
+        }]
+    }
+});
+
+// PHQ-9 trend chart
+new Chart(document.getElementById('phqTrend'), {
+    type: 'bar',
+    data: {
+        labels: {{ phq9_history | map(attribute='timestamp') | list | tojson }},
+        datasets: [{
+            label: 'PHQ-9 Score',
+            data: {{ phq9_history | map(attribute='score') | list | tojson }},
+            backgroundColor: '#2196F3'
+        }]
+    }
+});
+
+// Sentiment pie chart
+new Chart(document.getElementById('sentimentChart'), {
+    type: 'pie',
+    data: {
+        labels: ['Positive', 'Neutral', 'Negative'],
+        datasets: [{
+            data: [
+                {{ chat_summary | selectattr("sentiment", "equalto", "positive") | list | count }},
+                {{ chat_summary | selectattr("sentiment", "equalto", "neutral") | list | count }},
+                {{ chat_summary | selectattr("sentiment", "equalto", "negative") | list | count }}
+            ],
+            backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
+        }]
+    }
+});
+</script>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<html>
+<head>
+    <title>PHQ-9 Depression Assessment</title>
+</head>
+<body>
+    <h2>PHQ-9 Questionnaire</h2>
+    <form method="POST">
+        {% for i in range(1, 10) %}
+            <p><strong>{{ i }}. {{ questions[i-1] }}</strong></p>
+            {% for j in range(4) %}
+                <input type="radio" name="q{{ i }}" value="{{ j }}" required>
+                {{ choices[j] }}<br>
+            {% endfor %}
+            <br>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+{% endblock %}

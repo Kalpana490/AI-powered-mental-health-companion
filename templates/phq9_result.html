@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="result-box" style="
+    background: #ffffff;
+    padding: 25px;
+    margin: 30px auto;
+    width: 70%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    font-family: Arial, sans-serif;
+">
+
+    <h2 style="text-align:center; margin-bottom:20px;">PHQ-9 Assessment Results</h2>
+
+    <!-- Score -->
+    <p><strong>Total Score:</strong> {{ score }}</p>
+
+    <!-- Severity with badge colors -->
+    <p>
+        <strong>Depression Severity:</strong>
+        {% if level == "Minimal" %}
+            <span style="color:#2b8a3e; font-weight:bold;">{{ level }}</span>
+        {% elif level == "Mild" %}
+            <span style="color:#66a80f; font-weight:bold;">{{ level }}</span>
+        {% elif level == "Moderate" %}
+            <span style="color:#e67700; font-weight:bold;">{{ level }}</span>
+        {% elif level == "Moderately Severe" %}
+            <span style="color:#d9480f; font-weight:bold;">{{ level }}</span>
+        {% else %}
+            <span style="color:#c92a2a; font-weight:bold;">{{ level }}</span>
+        {% endif %}
+    </p>
+
+    <!-- Summary -->
+    {% if message %}
+    <p class="section-title" style="margin-top:25px; font-weight:bold;">Summary:</p>
+    <p>{{ message }}</p>
+    {% endif %}
+
+    <!-- Recommended Actions -->
+    {% if suggestions %}
+    <p class="section-title" style="margin-top:25px; font-weight:bold;">Recommended Actions:</p>
+    <ul style="margin-top:10px;">
+        {% for item in suggestions %}
+            <li style="margin-bottom:6px;">{{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div style="text-align: center; margin-top:25px;">
+        <a href="{{ url_for('phq9') }}" style="
+            background:#4f46e5;
+            padding:10px 18px;
+            color:white;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:bold;">
+            Take Assessment Again
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

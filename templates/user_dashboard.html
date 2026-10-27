@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 style="text-align:center; margin-bottom:20px;">Your Mental Health Analytics Dashboard</h2>
+
+<div class="dashboard-container" style="width:90%; margin:auto;">
+
+    <!-- Summary Cards -->
+    <div class="cards" style="display:flex; gap:20px; justify-content:center; margin-bottom:30px;">
+        <div class="card" style="background:#eef; padding:20px; border-radius:10px; width:30%; text-align:center;">
+            <h3>Total Stress Checks</h3>
+            <p style="font-size:22px; font-weight:bold;">{{ stress_data|length }}</p>
+        </div>
+
+        <div class="card" style="background:#efe; padding:20px; border-radius:10px; width:30%; text-align:center;">
+            <h3>PHQ-9 Screenings</h3>
+            <p style="font-size:22px; font-weight:bold;">{{ phq9_data|length }}</p>
+        </div>
+
+        <div class="card" style="background:#fee; padding:20px; border-radius:10px; width:30%; text-align:center;">
+            <h3>Chat Interactions</h3>
+            <p style="font-size:22px; font-weight:bold;">{{ chat_data|length }}</p>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <h3>📈 Stress Level Trend</h3>
+    <canvas id="stressChart"></canvas>
+
+    <h3 style="margin-top:40px;">📊 PHQ-9 Severity Progression</h3>
+    <canvas id="phq9Chart"></canvas>
+
+    <h3 style="margin-top:40px;">💬 Chat Sentiment Overview</h3>
+    <canvas id="sentimentChart"></canvas>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const stressData = {{ stress_json|safe }};
+    const phqData = {{ phq9_json|safe }};
+    const chatData = {{ chat_json|safe }};
+
+    /* ----------------------- Stress Chart ----------------------- */
+    const stressLabels = stressData.map(item => item.timestamp);
+    const stressLevels = stressData.map(item => 
+        item.stress_level === "High Stress" ? 2 :
+        item.stress_level === "Moderate Stress" ? 1 : 0
+    );
+
+    new Chart(document.getElementById('stressChart'), {
+        type: 'line',
+        data: {
+            labels: stressLabels,
+            datasets: [{
+                label: 'Stress Level Over Time',
+                data: stressLevels,
+                borderWidth: 2,
+                tension: 0.3
+            }]
+        }
+    });
+
+    /* ----------------------- PHQ9 Chart ----------------------- */
+    const phqLabels = phqData.map(item => item.timestamp);
+    const phqScores = phqData.map(item => item.score);
+
+    new Chart(document.getElementById('phq9Chart'), {
+        type: 'line',
+        data: {
+            labels: phqLabels,
+            datasets: [{
+                label: 'PHQ-9 Score Progression',
+                data: phqScores,
+                borderWidth: 2,
+                borderColor: 'green',
+                tension: 0.3
+            }]
+        }
+    });
+
+    /* ----------------------- Sentiment Chart ----------------------- */
+    const sentimentCount = {
+        positive: chatData.filter(x => x.sentiment === "positive").length,
+        neutral: chatData.filter(x => x.sentiment === "neutral").length,
+        negative: chatData.filter(x => x.sentiment === "negative").length
+    };
+
+    new Chart(document.getElementById('sentimentChart'), {
+        type: 'bar',
+        data: {
+            labels: ["Positive", "Neutral", "Negative"],
+            datasets: [{
+                label: 'Sentiment Count',
+                data: [sentimentCount.positive, sentimentCount.neutral, sentimentCount.negative],
+                backgroundColor: ['#4caf50', '#9e9e9e', '#f44336']
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

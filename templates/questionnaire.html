@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Stress Questionnaire - rate all below 10 </h2>
+
+<form method="POST">
+  {% set questions = {
+    'anxiety_level': 'How often do you feel anxious or worried?',
+    'mental_health_history': 'Have you been previously diagnosed with a mental health condition? (0 = No, 1 = Yes)',
+    'depression': 'How often do you feel down, depressed, or hopeless?',
+    'headache': 'How frequently do you experience headaches or tension?',
+    'sleep_quality': 'How would you rate your sleep quality?',
+    'breathing_problem': 'Do you experience shortness of breath or breathing issues?',
+    'living_conditions': 'How would you rate your current living environment?',
+    'daily_responsibility': 'How balanced do you feel your daily responsibilities are?',
+    'day_stress': 'How heavy does your day-to-day stress feel?',
+    'future_career_concerns': 'How concerned are you about your future career?',
+    'extracurricular_activities': 'How supported do you feel by friends, family, or people around you?'
+  } %}
+
+  {% for field, question in questions.items() %}
+    <label>{{ question }}</label><br>
+    <input type="number" name="{{ field }}" step="0.1" min="0" max="10" required><br><br>
+  {% endfor %}
+
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

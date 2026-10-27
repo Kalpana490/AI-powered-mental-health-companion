@@ -1,0 +1,465 @@
+/*/* Base styles
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+  color: #333;
+}*/
+
+/* Flex container for sticky footer
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}*/
+
+/* Header styles
+header {
+  background: #4f46e5;
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+nav {
+  margin-top: 0.5em;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #d1d5db;
+}*/
+
+/* Main content area
+main {
+  flex: 1;
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}*/
+
+/* Footer styles
+footer {
+  background: #4f46e5;
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+  animation: slideUp 1s ease-in-out;
+}*/
+
+/* Form and input styles
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: #3730a3;
+  transform: scale(1.05);
+}*/
+
+/* Result and error messages
+.result {
+  background: #d1fae5;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 15px;
+  border-radius: 8px;
+  animation: shake 0.3s ease-in-out;
+}*/
+
+/* Animations
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}*/
+
+/* Chatbot styles
+.chat-box {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.chat-input button:hover {
+  background: #3730a3;
+  transform: scale(1.05);
+}*/
+
+/* Landing page styles
+.centered {
+  text-align: center;
+  margin-top: 100px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.button-group {
+  margin-top: 30px;
+}
+
+.animated-button {
+  display: inline-block;
+  padding: 12px 25px;
+  margin: 10px;
+  background: #4f46e5;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.animated-button:hover {
+  background: #3730a3;
+  transform: scale(1.1);
+}*/
+
+/* Responsive tweaks
+@media (max-width: 600px) {
+  nav a {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .chat-input {
+    flex-direction: column;
+  }
+
+  .chat-input input,
+  .chat-input button {
+    width: 100%;
+  }
+
+  .animated-button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+  }
+}
+*/
+
+/* new code*/
+
+/* Base styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  /* Background image from static folder */
+  background: url('stress.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Flex container for sticky footer */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header styles */
+header {
+  background: linear-gradient(270deg, #a5c5d9, #bfd7ea);
+  background-size: 400% 400%;
+  color: #1f2937;
+  text-align: center;
+  padding: 1.2em 0;
+  animation: gradientMove 6s ease infinite, fadeInDown 1s ease-out;
+}
+
+nav {
+  margin-top: 0.5em;
+  animation: fadeIn 2s ease;
+}
+
+nav a {
+  color: #1f2937;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.3s;
+}
+
+nav a:hover {
+  color: #64748b;
+  transform: scale(1.05);
+}
+
+/* Main content area */
+main {
+  flex: 1;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Footer styles */
+footer {
+  background: linear-gradient(270deg, #a5c5d9, #bfd7ea);
+  background-size: 400% 400%;
+  color: #1f2937;
+  text-align: center;
+  padding: 1em 0;
+  animation: gradientMove 6s ease infinite, fadeInUp 1s ease-in-out;
+}
+
+/* Form and input styles */
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+}
+
+textarea:focus,
+input:focus {
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.2);
+}
+
+/* Buttons */
+button {
+  padding: 12px 24px;
+  background: #7fa7ba;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pulse 2.5s infinite;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+button:hover {
+  background: #688fa3;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Result and error messages */
+.result {
+  background: #d1f0e1;
+  color: #065f46;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+.error {
+  background: #fbeaea;
+  color: #9f1239;
+  padding: 15px;
+  border-radius: 8px;
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Chatbot styles */
+.chat-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 15px;
+  border-radius: 8px;
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+}
+
+.chat-input input:focus {
+  border-color: #a5b4fc;
+  box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.2);
+}
+
+/* Landing page styles */
+.centered {
+  text-align: center;
+  margin-top: 100px;
+  animation: fadeInUp 1.2s ease;
+}
+
+.button-group {
+  margin-top: 30px;
+}
+
+.animated-button {
+  display: inline-block;
+  padding: 14px 28px;
+  margin: 10px;
+  background: #7fa7ba;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s, background 0.3s;
+  animation: pulse 2.5s infinite;
+}
+
+.animated-button:hover {
+  background: #5f8597;
+  transform: scale(1.05);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  nav a {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .chat-input {
+    flex-direction: column;
+  }
+
+  .chat-input input,
+  .chat-input button {
+    width: 100%;
+  }
+
+  .animated-button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}

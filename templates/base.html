@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title or " AI-Powered Mental Health Companion Using NLP for Emotional Support and Self-Care Guidance " }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* ✨ Animate page load */
+    body {
+      animation: fadeInBody 1s ease-in-out;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ✨ Logo pulse */
+    header h1 {
+      animation: pulseLogo 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseLogo {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); color: #4f46e5; }
+    }
+
+    /* ✨ Nav hover effect */
+    nav a {
+      position: relative;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #4f46e5;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: #4f46e5;
+    }
+
+    /* ✨ Section fade-in effect */
+    .fade-in {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ✨ Footer slide-up effect */
+    .slide-up {
+      animation: slideUp 0.8s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="fade-in">
+      <h1> AI-Powered Mental Health Companion Using NLP for Emotional Support and Self-Care Guidance
+</h1>
+     <nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('vader_page') }}">Sentiment</a>
+
+    <!-- ⭐ NEW Emotion Tab -->
+    <a href="{{ url_for('emotion_page') }}">Emotion Detection</a>
+
+    <a href="{{ url_for('questionnaire') }}">Questionnaire</a>
+    <a href="{{ url_for('phq9') }}">PHQ-9</a>
+    <a href="{{ url_for('chat') }}">Chatbot</a>
+         <a href="{{ url_for('user_dashboard') }}">Dashboard</a>
+
+
+    {% if 'user' in session %}
+
+        {% if session['user'] == 'admin' %}
+            <a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+        {% endif %}
+
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+
+    {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Signup</a>
+    {% endif %}
+</nav>
+
+
+    </header>
+
+    <main class="fade-in">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="slide-up">
+      <p>&copy; 2025  AI-Powered Mental Health Companion Using NLP for Emotional Support and Self-Care Guidance
+ Support Powered by AI</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="centered">
+  <h2>Welcome to MindMend AI</h2>
+  <p>Please choose an option to continue:</p>
+  <div class="button-group">
+    <a href="{{ url_for('login') }}" class="animated-button">Login</a>
+    <a href="{{ url_for('signup') }}" class="animated-button">Signup</a>
+  </div>
+</div>
+{% endblock %}
